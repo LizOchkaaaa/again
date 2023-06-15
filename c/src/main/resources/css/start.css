@@ -1,0 +1,4 @@
+.start {
+    -fx-background-image: url("../img/labb8.jpg");
+    -fx-background-size: cover;
+}

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="820.0" styleClass="table" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.c.controllers.Table">
+   <top>
+      <Pane prefHeight="48.0" prefWidth="600.0" styleClass="table" BorderPane.alignment="CENTER">
+         <children>
+            <ChoiceBox fx:id="languages" layoutX="650.0" layoutY="13.0" prefWidth="150.0" />
+            <Group>
+               <children>
+                  <AnchorPane layoutX="14.0" prefHeight="43.0" prefWidth="103.0">
+                     <children>
+                        <Label fx:id="loginText" alignment="CENTER" layoutX="9.0" layoutY="13.0" prefHeight="18.0" prefWidth="195.0" text="Author" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Group>
+            <Label fx:id="exit" accessibleText="center" contentDisplay="CENTER" layoutX="237.0" layoutY="3.0" onMouseClicked="#exitFromTable" prefHeight="38.0" prefWidth="370.0" style="-fx-alignment: center;" text="Study group">
+               <font>
+                  <Font name="SimSun-ExtB" size="36.0" />
+               </font></Label>
+            <Group>
+               <children>
+                  <AnchorPane layoutX="55.0" layoutY="48.0" prefHeight="574.0" prefWidth="761.0">
+                     <children>
+                        <TableView layoutX="114.0" prefHeight="476.0" prefWidth="641.0">
+                          <columns>
+                              <TableColumn fx:id="id" prefWidth="36.00003433227539" text="id" />
+                              <TableColumn fx:id="name" prefWidth="56.800048828125" text="Имя" />
+                              <TableColumn fx:id="coordinateX" prefWidth="39.99993896484375" text=" X" />
+                            <TableColumn fx:id="coordinateY" prefWidth="38.4000244140625" text="Y" />
+                            <TableColumn fx:id="count" prefWidth="51.19999694824219" text="Число" />
+                              <TableColumn fx:id="formOfEducation" prefWidth="49.60003662109375" text="Форма" />
+                              <TableColumn fx:id="semester" minWidth="8.79998779296875" prefWidth="64.79998779296875" text="Семестр" />
+                              <TableColumn minWidth="0.0" prefWidth="0.0" text="Column X" />
+                              <TableColumn fx:id="AdminName" prefWidth="48.0" text="Имя" />
+                              <TableColumn fx:id="AdminBirthday" prefWidth="50.4000244140625" text="Дата" />
+                              <TableColumn fx:id="AdminWeight" prefWidth="71.2000732421875" text="Вес" />
+                              <TableColumn fx:id="AdminPassport" prefWidth="60.7999267578125" text="Пасспорт" />
+                              <TableColumn fx:id="AdminColour" prefWidth="90.4000244140625" text="Цвет" />
+                          </columns>
+                        </TableView>
+                        <HBox layoutY="393.0" prefHeight="45.0" prefWidth="98.0" />
+                        <HBox layoutX="114.0" layoutY="393.0" prefHeight="42.0" prefWidth="114.0" />
+                        <HBox layoutX="249.0" layoutY="391.0" prefHeight="42.0" prefWidth="96.0" />
+                        <HBox layoutX="380.0" layoutY="391.0" prefHeight="42.0" prefWidth="93.0" />
+                        <HBox layoutX="502.0" layoutY="391.0" prefHeight="42.0" prefWidth="138.0" />
+                        <HBox layoutX="169.0" layoutY="451.0" prefHeight="46.0" prefWidth="116.0" />
+                        <HBox layoutX="518.0" layoutY="448.0" prefHeight="50.0" prefWidth="107.0" />
+                        <Button fx:id="update" layoutX="-44.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#updateClick" prefHeight="46.0" prefWidth="93.0" text="Обновить" />
+                        <Button fx:id="executeScript" layoutX="-44.0" layoutY="305.0" mnemonicParsing="false" onMouseClicked="#executeScriptClick" prefHeight="45.0" prefWidth="98.0" text="Скрипт" />
+                        <Button fx:id="removeId" layoutX="-40.0" layoutY="364.0" mnemonicParsing="false" onMouseClicked="#removeIdClick" prefHeight="50.0" prefWidth="92.0" text="Элемент" />
+                        <Button fx:id="sumStudents" layoutX="-42.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#sumClick" prefHeight="42.0" prefWidth="143.0" text="Сумма всех студентов" />
+                        <Button fx:id="start" contentDisplay="TOP" layoutX="381.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#startClick" prefHeight="56.0" prefWidth="144.0" text="Старт" />
+                     </children>
+                  </AnchorPane>
+                  <Button fx:id="add" layoutX="6.0" layoutY="62.0" mnemonicParsing="false" onMouseClicked="#addClick" prefHeight="43.0" prefWidth="98.0" text="Добавить" />
+                  <Button fx:id="help" layoutX="7.0" layoutY="115.0" mnemonicParsing="false" onMouseClicked="#helpClick" prefHeight="45.0" prefWidth="96.0" text="Помощь" />
+                  <Button fx:id="clear" layoutX="10.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#clearClick" prefHeight="42.0" prefWidth="95.0" text="Очистить" />
+                  <Button fx:id="info" layoutX="10.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#infoClick" prefHeight="42.0" prefWidth="95.0" text="Информация" />
+                  <Button fx:id="removeGreater" layoutX="10.0" layoutY="477.0" mnemonicParsing="false" onMouseClicked="#removeGreaterClick" prefHeight="46.0" prefWidth="114.0" text="Удалить больший" />
+               </children>
+            </Group>
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <Group BorderPane.alignment="CENTER" />
+   </center>
+   <stylesheets>
+      <URL value="@../../../css/table.css" />
+      <URL value="@../../../css/table.css" />
+   </stylesheets>
+</BorderPane>

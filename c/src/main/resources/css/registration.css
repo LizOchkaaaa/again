@@ -1,0 +1,4 @@
+.registration {
+    -fx-background-image: url("../img/registration.jpg");
+    -fx-background-size: cover;
+}
