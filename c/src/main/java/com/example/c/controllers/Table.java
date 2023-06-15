@@ -1,5 +1,6 @@
 package com.example.c.controllers;
 import com.example.c.ProxyController;
+import com.example.c.models.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -9,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import main.org.example.models.Person;
 import main.org.example.models.StudyGroup;
 
 import java.net.URL;
@@ -96,7 +96,7 @@ public class Table implements Initializable, CloseAction {
     @FXML
     private Button update;
 
-    private static ObservableList<Person> study = FXCollections.observableArrayList();
+    private static ObservableList<com.example.c.models.Person> study = FXCollections.observableArrayList();
 
     private static Table instance;
 

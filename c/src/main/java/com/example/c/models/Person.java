@@ -62,4 +62,10 @@ public class Person implements Serializable {
     public void start() {
         animator = new Animation(hairColor);
     }
+
+    public void finish() {
+        try {
+            animator.remove();
+        } catch (NullPointerException ignored) {}
+    }
 }
