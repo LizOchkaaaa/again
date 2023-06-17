@@ -29,8 +29,6 @@ public class ClientWorker {
     }
 
     public Response sendRequest(byte[] dataToSend) {
-
-
         try {
 
             DatagramPacket packet = new DatagramPacket(dataToSend, dataToSend.length);

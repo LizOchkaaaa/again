@@ -13,6 +13,8 @@ public class Person implements Serializable {
     @Complex
     private Color hairColor; //Поле не может быть null
 
+    private String character;
+
     public Person(){}
     public Person(String name , ZonedDateTime birthday , Integer weight , String passportID , Color hairColor) {
         this.name = name;
@@ -21,7 +23,6 @@ public class Person implements Serializable {
         this.passportID = passportID;
         this.hairColor = hairColor;
     }
-
     public String getName() {
         return name;
     }
@@ -54,5 +55,9 @@ public class Person implements Serializable {
         return "Person [name=" + name + ", birthday=" + birthday + ", weight="
                 + weight + ", passportID=" + passportID + ", hairColor=" + hairColor
                 + "]";
+    }
+
+    public String getCharacter() {
+        return character;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.c.Handler;
 
-import com.example.c.RequestHandlerInterface;
+import com.example.c.Interface.RequestHandlerInterface;
 import com.example.c.Worker.ClientWorker;
 import main.org.example.main.*;
 import main.org.example.models.StudyGroup;

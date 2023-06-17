@@ -1,7 +1,5 @@
 package com.example.c.models;
 
-import com.example.c.controllers.Animation;
-
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;

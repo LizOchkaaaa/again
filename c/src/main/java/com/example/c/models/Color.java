@@ -17,11 +17,11 @@ public enum Color implements Serializable {
         stringInLowerCaseRepresentation = aStringInLowerCaseRepresentation;
     }
 
-    private String getStringInLowerCaseRepresentation() {
+    public String getStringInLowerCaseRepresentation() {
         return stringInLowerCaseRepresentation;
     }
 
-    private String getStringInUpperCaseRepresentation() {
+    public String getStringInUpperCaseRepresentation() {
         return stringInUpperCaseRepresentation;
     }
 

@@ -1,5 +1,6 @@
 package com.example.c;
 
+import com.example.c.FX.Translation;
 import com.example.c.Handler.RequestHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

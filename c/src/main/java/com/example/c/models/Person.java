@@ -1,8 +1,7 @@
 package com.example.c.models;
 
-import com.example.c.controllers.Animation;
+import com.example.c.FX.Animation;
 import main.org.example.annotation.Complex;
-import main.org.example.models.StudyGroup;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;

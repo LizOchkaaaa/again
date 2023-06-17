@@ -11,6 +11,7 @@ public enum Color implements Serializable {
     WHITE("WHITE", "white");
     private final String stringInUpperCaseRepresentation;
     private final String stringInLowerCaseRepresentation;
+    private String color;
 
     Color(String aStringInUpperCaseRepresentation, String aStringInLowerCaseRepresentation) {
         stringInUpperCaseRepresentation = aStringInUpperCaseRepresentation;
@@ -36,5 +37,9 @@ public enum Color implements Serializable {
     @Override
     public String toString() {
         return getStringInUpperCaseRepresentation();
+    }
+
+    public String getColor() {
+        return color;
     }
 }

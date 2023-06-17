@@ -1,7 +1,7 @@
 package com.example.c.Worker;
 
-import com.example.c.InputClireader;
-import com.example.c.OutStream;
+import com.example.c.Object.InputClireader;
+import com.example.c.Object.OutStream;
 import main.org.example.main.Session;
 import main.org.example.main.TypeOfSession;
 

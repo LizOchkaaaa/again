@@ -1,7 +1,7 @@
 package com.example.c.validatorClient;
 
-import com.example.c.AvailableCommands;
-import com.example.c.controllers.ValidatorInterface;
+import com.example.c.Object.AvailableCommands;
+import com.example.c.FX.ValidatorInterface;
 import main.org.example.main.CommandFactory;
 import main.org.example.main.Session;
 

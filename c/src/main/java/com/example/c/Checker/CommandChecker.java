@@ -1,7 +1,10 @@
 package com.example.c.Checker;
 
-import com.example.c.*;
 import com.example.c.Handler.RequestHandler;
+import com.example.c.Object.AvailableCommands;
+import com.example.c.Object.DataInOutStatus;
+import com.example.c.Object.MetaInfoCommand;
+import com.example.c.Object.OutStream;
 import main.org.example.main.CommandFactory;
 import main.org.example.main.TypeOfCommand;
 

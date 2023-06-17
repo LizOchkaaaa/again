@@ -1,8 +1,8 @@
 package com.example.c.Checker;
 
-import com.example.c.DataInOutStatus;
-import com.example.c.MetaInfoCommand;
-import com.example.c.ObjectReading;
+import com.example.c.Object.DataInOutStatus;
+import com.example.c.Object.MetaInfoCommand;
+import com.example.c.Object.ObjectReading;
 
 import java.util.ArrayList;
 

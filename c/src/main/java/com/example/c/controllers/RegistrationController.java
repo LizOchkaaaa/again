@@ -1,19 +1,13 @@
 package com.example.c.controllers;
-import com.example.c.Client;
-import com.example.c.ProxyController;
-import com.example.c.Registration;
-import com.example.c.Translation;
+import com.example.c.FX.Translation;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 /**
@@ -24,7 +18,7 @@ public class RegistrationController implements Initializable {
     @FXML
     private Button enter;
     @FXML
-    private ChoiceBox<String> language;
+    private ChoiceBox<String> languages;
 
     @FXML
     private TextField login;
@@ -35,14 +29,22 @@ public class RegistrationController implements Initializable {
     @FXML
     private Label registration;
 
+    @FXML
+    private Label passwordWarn;
+
+    @FXML
+    private Label welcome;
+
+    @FXML
+    private Label loginWarn;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ProxyController.setController(RegistrationController.class, this);
 
-        language.setItems(Translation.getAllLanguages());
-        language.setValue(Translation.getLanguage());
+        languages.setItems(Translation.getAllLanguages());
+        languages.setValue(Translation.getLanguage());
         new Translation(RegistrationController.class).changeLanguage(null);
-        language.setOnAction(new Translation(RegistrationController.class)::changeLanguage);
+        languages.setOnAction(new Translation(RegistrationController.class)::changeLanguage);
     }
 
     @FXML

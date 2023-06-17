@@ -10,6 +10,7 @@ public enum FormOfEducation implements Serializable {
 
     private final String stringInUpperCaseRepresentation;
     private final String stringInLowerCaseRepresentation;
+    private String type;
 
     FormOfEducation(String stringInUpperCaseRepresentation, String stringInLowerCaseRepresentation) {
         this.stringInUpperCaseRepresentation = stringInUpperCaseRepresentation;
@@ -29,5 +30,9 @@ public enum FormOfEducation implements Serializable {
                 aFormOfEducation.equals(formOfEducation.getStringInLowerCaseRepresentation()) ||
                         aFormOfEducation.equals(formOfEducation.getStringInUpperCaseRepresentation())
         );
+    }
+
+    public String getType() {
+        return type;
     }
 }
