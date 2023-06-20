@@ -1,17 +1,17 @@
 package com.example.c.Object;
 
 import com.example.c.Handler.RequestHandler;
-import com.example.c.Object.CommandReader;
+import com.example.c.controllers.NewLoginController;
 import com.example.c.controllers.RegistrationController;
 import com.example.c.validatorClient.Validator;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.org.example.main.CommandFactory;
-import main.org.example.main.Session;
-import main.org.example.main.TypeOfAnswer;
-import main.org.example.main.TypeOfSession;
+import org.example.main.CommandFactory;
+import org.example.main.Session;
+import org.example.main.TypeOfAnswer;
+import org.example.main.TypeOfSession;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -20,9 +20,11 @@ import java.net.UnknownHostException;
 
 public class FrameHandler {
     private final CommandReader commandReader;
+    private final NewLoginController loginController;
     private final RegistrationController registerController;
 
-    public FrameHandler(RegistrationController registerController) {
+    public FrameHandler(NewLoginController loginController, RegistrationController registerController) {
+        this.loginController = loginController;
         this.registerController = registerController;
         commandReader = CommandReader.getInstance();
     }

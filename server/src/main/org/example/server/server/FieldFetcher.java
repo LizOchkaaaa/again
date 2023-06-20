@@ -1,8 +1,8 @@
 package main.org.example.server.server;
 
-import main.org.example.annotation.Complex;
-import main.org.example.annotation.Date;
-import main.org.example.models.StudyGroup;
+import org.example.annotation.Complex;
+import org.example.annotation.Date;
+import org.example.models.StudyGroup;
 
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;

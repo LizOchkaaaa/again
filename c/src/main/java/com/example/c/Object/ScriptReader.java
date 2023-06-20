@@ -1,4 +1,4 @@
-//package com.example.c;
+package com.example.c.Object;//package com.example.c;
 //import main.org.example.main.CommandFactory;
 //
 //import java.io.*;

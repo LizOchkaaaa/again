@@ -2,8 +2,8 @@ package com.example.c.Worker;
 
 import com.example.c.Object.InputClireader;
 import com.example.c.Object.OutStream;
-import main.org.example.main.Session;
-import main.org.example.main.TypeOfSession;
+import org.example.main.Session;
+import org.example.main.TypeOfSession;
 
 import java.io.IOException;
 import java.util.regex.Pattern;

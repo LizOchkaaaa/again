@@ -1,7 +1,7 @@
 package com.example.c.validatorClient;
 
 
-import main.org.example.models.Color;
+import org.example.models.Color;
 
 public class ValidatorHairColor extends ValidateAbstract<Color> {
 

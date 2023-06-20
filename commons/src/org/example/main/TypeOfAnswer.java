@@ -1,0 +1,24 @@
+package org.example.main;
+
+import java.io.Serializable;
+
+public enum TypeOfAnswer implements Serializable{
+    OBJECTNOTEXIST,
+    DUPLICATESDETECTED,
+    ISNTMAX,
+    ISNTMIN,
+    PERMISSIONDENIED,
+    SUCCESSFUL,
+    SQLPROBLEM,
+    EMPTYCOLLECTION,
+    ALREADYREGISTERED,
+    NOTMATCH,
+    COMMANDNOTGO,
+    ANOTHERVERSION,
+    NETPROBLEM,
+    SERVERNOTAVAILABLE,
+    NOTSERIALIZED,
+    NOTVALIDATE,
+    RECURSIONDETECTED,
+    NOGREATER
+}

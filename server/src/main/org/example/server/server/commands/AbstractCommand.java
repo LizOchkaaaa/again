@@ -1,8 +1,9 @@
 package main.org.example.server.server.commands;
 
-import main.org.example.interfaces.Execute;
-import main.org.example.main.Request;
-import main.org.example.main.Response;
+
+import org.example.interfaces.Execute;
+import org.example.main.Request;
+import org.example.main.Response;
 
 public abstract class AbstractCommand implements Execute {
     private String name;

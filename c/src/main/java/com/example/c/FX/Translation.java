@@ -1,13 +1,15 @@
 package com.example.c.FX;
+
 import com.example.c.FlowText;
 import com.example.c.controllers.ProxyController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.*;
 import javafx.scene.control.ChoiceBox;
-import main.org.example.models.Color;
-import main.org.example.models.FormOfEducation;
+import javafx.scene.control.*;
+import org.example.models.Color;
+import org.example.models.FormOfEducation;
+import org.example.models.Semester;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -56,7 +58,7 @@ public class Translation {
     public void changeLanguage(ActionEvent event) {
         String[] bundles = {"Registration" , "Register" , "Table" , "Add"};
         try {
-            setLanguage(((javafx.scene.control.ChoiceBox<String>) controller.getField("languages")).getValue());
+            setLanguage(((ChoiceBox<String>) controller.getField("languages")).getValue());
         }catch (NullPointerException ignored){
         }
 
@@ -83,6 +85,7 @@ public class Translation {
 
                     changeColorLanguage(locale);
                     changeFormOfEducationLanguage(locale);
+                    changeSemesterLanguage(locale);
                 } catch (MissingResourceException | IllegalAccessException | NullPointerException ignored) {
                 }
             }
@@ -92,12 +95,12 @@ public class Translation {
 
     public void changeColorLanguage(Locale locale) {
         String[] enums = new String[Color.values().length];
-        ResourceBundle bundle = ResourceBundle.getBundle("properties.Table", locale);
+        ResourceBundle bundle = ResourceBundle.getBundle("properties.Add", locale);
         for (Color color : Color.values()) {
             enums[color.ordinal()] = bundle.getString(color.getColor());
         }
 
-        javafx.scene.control.ChoiceBox<String> colors = controller.getField("colorChoice");
+        ChoiceBox<String> colors = controller.getField("color");
         int index = colors.getSelectionModel().getSelectedIndex();
         colors.getItems().setAll(enums);
         if (index >= 0) {
@@ -108,10 +111,25 @@ public class Translation {
     public void changeFormOfEducationLanguage(Locale locale) {
         String[] enums = new String[FormOfEducation.values().length];
         for (FormOfEducation type : FormOfEducation.values()) {
-            enums[type.ordinal()] = ResourceBundle.getBundle("properties.Table", locale).getString(type.getType());
+            enums[type.ordinal()] = ResourceBundle.getBundle("properties.Add", locale).getString(type.getForm());
         }
 
-        ChoiceBox<String> type = controller.getField("typeChoice");
+        ChoiceBox<String> type = controller.getField("form");
+        int index = type.getSelectionModel().getSelectedIndex();
+        type.getItems().setAll(enums);
+        if (index >= 0) {
+            type.setValue(enums[index]);
+        }
+    }
+
+
+    public void changeSemesterLanguage(Locale locale) {
+        String[] enums = new String[Semester.values().length];
+        for (Semester type : Semester.values()) {
+            enums[type.ordinal()] = ResourceBundle.getBundle("properties.Add", locale).getString(type.getSemester());
+        }
+
+        ChoiceBox<String> type = controller.getField("semester");
         int index = type.getSelectionModel().getSelectedIndex();
         type.getItems().setAll(enums);
         if (index >= 0) {

@@ -20,16 +20,16 @@
                <children>
                   <VBox layoutX="181.0" layoutY="171.0" prefHeight="71.0" prefWidth="281.0" spacing="15.0">
                      <children>
-                        <TextField fx:id="login" prefHeight="0.0" prefWidth="231.0" promptText="Login">
+                        <TextField fx:id="login" onMouseClicked="#validate" prefHeight="0.0" prefWidth="231.0" promptText="Login">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin></TextField>
-                        <Label fx:id="passwordWarn" prefHeight="11.0" prefWidth="282.0" style="-fx-alignment: center;" text="Это хрень. Введите заново" textFill="RED">
+                        <Label fx:id="passwordWarn" prefHeight="11.0" prefWidth="282.0" style="-fx-alignment: center;" textFill="RED">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <PasswordField fx:id="password" promptText="Password" />
+                        <PasswordField fx:id="password" onMouseClicked="#validate" promptText="Password" />
                      </children>
                   </VBox>
                   <Label fx:id="registration" layoutX="204.0" layoutY="355.0" onMouseClicked="#registerClick" prefHeight="18.0" prefWidth="235.0" style="-fx-alignment: center;" text="REGISTRATION">
@@ -44,7 +44,7 @@
                         <Font name="SimSun-ExtB" size="36.0" />
                      </font>
                   </Label>
-                  <Label fx:id="loginWarn" layoutX="182.0" layoutY="128.0" prefHeight="18.0" prefWidth="280.0" style="-fx-alignment: center;" text="Это хрень. Введите заново" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="loginWarn" layoutX="182.0" layoutY="128.0" prefHeight="18.0" prefWidth="280.0" style="-fx-alignment: center;" textAlignment="CENTER" textFill="RED">
                      <font>
                         <Font size="18.0" />
                      </font>

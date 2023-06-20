@@ -1,7 +1,8 @@
 package main.org.example.server.server;
 
-import main.org.example.main.Request;
-import main.org.example.models.StudyGroup;
+
+import org.example.main.Request;
+import org.example.models.StudyGroup;
 
 import java.time.ZonedDateTime;
 

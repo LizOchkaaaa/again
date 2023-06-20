@@ -1,22 +1,27 @@
 package com.example.c.FX;
 
+import com.example.c.Interface.ConsoleInterface;
 import com.example.c.Object.CommandManager;
+import com.example.c.Object.Consolee;
+import com.example.c.controllers.NewLoginController;
 import com.example.c.controllers.ProxyController;
 import com.example.c.controllers.RegistrationController;
 import com.example.c.validatorClient.Validator;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import main.org.example.main.Session;
-import main.org.example.main.TypeOfSession;
+import org.example.main.Session;
+import org.example.main.TypeOfAnswer;
+import org.example.main.TypeOfSession;
 
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class NewLogin implements Runnable{
-    private final ProxyController controller = new ProxyController(RegistrationController.class);
+    private final ProxyController controller = new ProxyController(NewLoginController.class);
     private ValidatorInterface validator;
+
     private String login;
     private String password;
     private Locale locale;
@@ -29,40 +34,45 @@ public class NewLogin implements Runnable{
         validator = Validator.getInstance();
     }
 
-    public void registerNew() {
-    }
-
-    @Override
-    public void run() {
+    public boolean registerNew() {
         if (registerEmpty() & registerLong()) {
-            Object[] fields = controller.getFields("register", "enter", "languages");
-            Arrays.stream(fields).forEach(r -> ((Node) r).setDisable(true));
             login = ((TextField) controller.getField("login")).getText();
             password = ((TextField) controller.getField("password")).getText();
 
             Session session = new Session(login, password, TypeOfSession.Register);
-
             CommandManager commandManager = new CommandManager(validator, controller);
-            commandManager.transferCommand(session);
+            if (commandManager.transferCommand(session).getStatus() == TypeOfAnswer.SUCCESSFUL){
+                return true;
+            }
+            else {
+                return false;
+            }
+
         }
+        return false;
+    }
+
+    @Override
+    public void run() {
+
     }
     private boolean registerEmpty() {
-        ProxyController controller = new ProxyController(RegistrationController.class);
+        ProxyController controller = new ProxyController(NewLoginController.class);
 
         boolean result = true;
-        String bundle = "properties.Registration";
+        String bundle = "properties.Register";
 
 
         TextField login = controller.getField("login");
         if (login.getText().length() == 0) {
-            Label label = controller.getField("loginLabel");
+            Label label = controller.getField("loginWarn");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("loginEmpty"));
             result = false;
         }
 
         TextField password = controller.getField("password");
         if (password.getText().length() == 0) {
-            Label label = controller.getField("passwordLabel");
+            Label label = controller.getField("passwordWarn");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("passwordEmpty"));
             result = false;
         }
@@ -71,31 +81,20 @@ public class NewLogin implements Runnable{
 
     }
     public boolean registerLong() {
-        ProxyController controller = new ProxyController(RegistrationController.class);
+        ProxyController controller = new ProxyController(NewLoginController.class);
         boolean result = true;
-        String bundle = "properties.Registration";
-
-        TextField port = controller.getField("port");
-        try {
-            if (port.getText().length() != 0) {
-                Integer.parseInt(port.getText());
-            }
-        } catch (NumberFormatException e) {
-            Label label = controller.getField("portLabel");
-            label.setText(ResourceBundle.getBundle(bundle, locale).getString("portWrongFormat"));
-            result = false;
-        }
+        String bundle = "properties.Register";
 
         TextField login = controller.getField("login");
         if (login.getText().length() > 32) {
-            Label label = controller.getField("loginLabel");
+            Label label = controller.getField("loginWarn");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("loginLong"));
             result = false;
         }
 
         TextField password = controller.getField("password");
         if (password.getText().length() > 32) {
-            Label label = controller.getField("passwordLabel");
+            Label label = controller.getField("passwordWarn");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("passwordLong"));
             result = false;
         }

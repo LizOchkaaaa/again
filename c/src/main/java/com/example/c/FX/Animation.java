@@ -1,11 +1,11 @@
 package com.example.c.FX;
 
-import com.example.c.models.Color;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import org.example.models.Color;
 
 import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
@@ -79,7 +79,7 @@ public class Animation {
 
     private void setImage() {
         try {
-            image.setImage(new Image(getClass().getResource("/img/person" + color.getStringInUpperCaseRepresentation() + ".png").toURI()
+            image.setImage(new Image(getClass().getResource("/img/person" + color.getColor() + ".png").toURI()
                     .toString()));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);

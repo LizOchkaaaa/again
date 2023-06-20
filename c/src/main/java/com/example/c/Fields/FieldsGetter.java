@@ -2,7 +2,7 @@ package com.example.c.Fields;
 
 import com.example.c.Object.Consolee;
 import com.example.c.Object.TypeOfArgument;
-import main.org.example.models.*;
+import org.example.models.*;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
@@ -192,8 +192,8 @@ public class FieldsGetter {
             if (line != null && line.trim().equals("")) line = null;
             if (line == null) return null;
 
-            if (FormOfEducation.isIncludeElement(line.toUpperCase()))
-                return FormOfEducation.valueOf(line.toUpperCase());
+//            if (FormOfEducation.isIncludeElement(line.toUpperCase()))
+//                return FormOfEducation.valueOf(line.toUpperCase());
 
             line = getUniversalEnumRequest("form of education", console);
         }
@@ -206,7 +206,7 @@ public class FieldsGetter {
                 + ("\n-----"), console);
         if (line == null) return null;
 
-        while (line == null || !Semester.isIncludeElement(line.toUpperCase())) {
+       while (line == null) {
 
             line = getUniversalEnumRequest("semester", console);
 
@@ -241,7 +241,7 @@ public class FieldsGetter {
 
         if (line == null) return null;
 
-        while (line == null || !Color.isIncludeElement(line.toUpperCase())) {
+        while (line == null) {
 
             line = getUniversalEnumRequest("group admin hair color", console);
 

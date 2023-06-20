@@ -1,7 +1,7 @@
 package main.org.example.server.server.Validator;
 
 
-import main.org.example.models.FormOfEducation;
+import org.example.models.FormOfEducation;
 
 public class ValidatorFormOfEducation extends ValidateAbstract<FormOfEducation>{
 

@@ -1,10 +1,10 @@
 package main.org.example.server.server.commands;
 
-import main.org.example.interfaces.Execute;
-import main.org.example.main.Request;
-import main.org.example.main.Response;
-import main.org.example.main.TypeOfAnswer;
+import main.org.example.server.server.Interfaces.Execute;
 import main.org.example.server.server.Receiver;
+import org.example.main.Request;
+import org.example.main.Response;
+import org.example.main.TypeOfAnswer;
 
 import java.util.Collection;
 
@@ -21,7 +21,7 @@ public class HelpCommand extends AbstractCommand implements Execute {
     @Override
     public Response execute(Request request) {
         StringBuilder execution = new StringBuilder();
-        for (Execute command : collectionOfCommands) {
+        for (org.example.interfaces.Execute command : collectionOfCommands) {
             execution.append(command.toString() + "\n");
         }
         execution.delete(execution.toString().length() - 1, execution.toString().length());

@@ -1,7 +1,6 @@
 package main.org.example.server.server;
 
-
-import main.org.example.models.StudyGroup;
+import org.example.models.StudyGroup;
 
 import java.util.Date;
 import java.util.Stack;

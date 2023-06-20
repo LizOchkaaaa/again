@@ -1,7 +1,7 @@
 package com.example.c.validatorClient;
 
 
-import main.org.example.models.FormOfEducation;
+import org.example.models.FormOfEducation;
 
 public class ValidatorFormOfEducation extends ValidateAbstract<FormOfEducation> {
 

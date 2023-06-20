@@ -1,9 +1,10 @@
 package com.example.c.Interface;
 
-import main.org.example.models.Coordinates;
-import main.org.example.models.FormOfEducation;
-import main.org.example.models.Person;
-import main.org.example.models.Semester;
+
+import org.example.models.Coordinates;
+import org.example.models.FormOfEducation;
+import org.example.models.Person;
+import org.example.models.Semester;
 
 public interface FieldsReceiver {
 

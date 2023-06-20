@@ -1,9 +1,9 @@
 package main.org.example.server.server.commands;
 
-import main.org.example.main.Request;
-import main.org.example.main.Response;
-import main.org.example.main.TypeOfAnswer;
 import main.org.example.server.server.Receiver;
+import org.example.main.Request;
+import org.example.main.Response;
+import org.example.main.TypeOfAnswer;
 
 public class RegisterUser extends AbstractCommand{
     private final Receiver receiver;

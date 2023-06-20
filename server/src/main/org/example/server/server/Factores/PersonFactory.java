@@ -1,7 +1,7 @@
 package main.org.example.server.server.Factores;
 
-import main.org.example.models.Color;
-import main.org.example.models.Person;
+import org.example.models.Color;
+import org.example.models.Person;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

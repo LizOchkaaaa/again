@@ -1,9 +1,8 @@
 package main.org.example.server.server.DataBase;
-
-import main.org.example.main.TypeOfAnswer;
-import main.org.example.models.StudyGroup;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.main.TypeOfAnswer;
+import org.example.models.StudyGroup;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

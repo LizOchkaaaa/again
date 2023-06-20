@@ -1,9 +1,9 @@
 package com.example.c.Interface;
 
-import main.org.example.main.CommandFactory;
-import main.org.example.main.Response;
-import main.org.example.main.Session;
-import main.org.example.models.StudyGroup;
+import org.example.main.CommandFactory;
+import org.example.main.Response;
+import org.example.main.Session;
+import org.example.models.StudyGroup;
 
 import java.net.InetSocketAddress;
 

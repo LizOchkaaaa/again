@@ -1,7 +1,7 @@
 package com.example.c.validatorClient;
 
 
-import main.org.example.models.Semester;
+import org.example.models.Semester;
 
 public class ValidatorSemester extends ValidateAbstract<Semester> {
 

@@ -2,8 +2,8 @@ package com.example.c.Worker;
 
 import com.example.c.Handler.RequestHandler;
 import com.example.c.Handler.ResponseHandler;
-import main.org.example.main.Response;
-import main.org.example.main.TypeOfAnswer;
+import org.example.main.Response;
+import org.example.main.TypeOfAnswer;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

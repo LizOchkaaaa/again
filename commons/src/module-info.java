@@ -1,6 +1,6 @@
 module org.example.commons {
-    exports main.org.example.models;
-    exports main.org.example.exceptions;
-    exports main.org.example.main;
-    exports main.org.example.annotation;
+    exports org.example.models;
+    exports org.example.exceptions;
+    exports org.example.main;
+    exports org.example.annotation;
 }

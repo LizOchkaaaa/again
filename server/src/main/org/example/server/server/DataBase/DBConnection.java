@@ -72,7 +72,7 @@ public class DBConnection {
             this.SSH_PORT = Integer.parseInt(System.getenv("SSH_PORT")); // 2222
             this.FORWARDING_PORT = Integer.parseInt(System.getenv("FORWARDING_PORT"));
 
-            Properties config = new java.util.Properties();
+            Properties config = new Properties();
             config.put("StrictHostKeyChecking", "no");
             JSch jsch = new JSch();
             Session session = jsch.getSession(SV_LOGIN, SV_ADDR, SSH_PORT);

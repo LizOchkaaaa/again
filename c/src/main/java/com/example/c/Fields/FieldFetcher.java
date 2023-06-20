@@ -1,6 +1,7 @@
 package com.example.c.Fields;
-import main.org.example.annotation.Complex;
-import main.org.example.models.StudyGroup;
+
+import org.example.annotation.Complex;
+import org.example.models.StudyGroup;
 
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;

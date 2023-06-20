@@ -1,7 +1,7 @@
 package com.example.c.FX;
 
-import main.org.example.main.CommandFactory;
-import main.org.example.main.Session;
+import org.example.main.CommandFactory;
+import org.example.main.Session;
 
 public interface ValidatorInterface {
     /**

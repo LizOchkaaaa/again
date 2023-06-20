@@ -1,8 +1,7 @@
 package main.org.example.server.server.commands;
-
-import main.org.example.main.Request;
-import main.org.example.main.Response;
 import main.org.example.server.server.Receiver;
+import org.example.main.Request;
+import org.example.main.Response;
 
 import java.io.Serializable;
 

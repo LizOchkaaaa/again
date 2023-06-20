@@ -2,19 +2,18 @@ package com.example.c.Handler;
 
 import com.example.c.Interface.RequestHandlerInterface;
 import com.example.c.Worker.ClientWorker;
-import main.org.example.main.*;
-import main.org.example.models.StudyGroup;
+import org.example.main.*;
+import org.example.models.StudyGroup;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
 import java.util.ArrayList;
 
 public class RequestHandler implements RequestHandlerInterface {
     private static RequestHandler instance;
-    private SocketAddress socketAddress;
+    private InetSocketAddress socketAddress;
     private boolean socketStatus;
     private Session session;
 
@@ -50,12 +49,10 @@ public class RequestHandler implements RequestHandlerInterface {
 
     @Override
     public void setRemoteHostSocketAddress(InetSocketAddress aSocketAddress) {
-
-    }
-
-    public void setRemoteHostSocketAddress(SocketAddress aSocketAddress){
         socketAddress = aSocketAddress;
     }
+
+
 
     public String getInformation(){
         return "Connection\n" +  "remote host address: " + socketAddress;
@@ -80,11 +77,11 @@ public class RequestHandler implements RequestHandlerInterface {
 
     public Response register(Session aSession) {
         setSession(aSession);
-        return send(new CommandFactory(TypeOfCommand.valueOf("register"), new ArrayList<String>()));
+        return send(new CommandFactory(TypeOfCommand.register, new ArrayList<String>()));
     }
 
     public Response login(Session aSession) {
         setSession(aSession);
-        return send(new CommandFactory(TypeOfCommand.valueOf("login"), new ArrayList<String>()));
+        return send(new CommandFactory(TypeOfCommand.login, new ArrayList<String>()));
     }
 }

@@ -1,9 +1,11 @@
 package main.org.example.server.server.commands;
 
-import main.org.example.interfaces.Execute;
-import main.org.example.main.Request;
-import main.org.example.main.Response;
+
 import main.org.example.server.server.Receiver;
+import org.example.interfaces.Execute;
+import org.example.main.Request;
+import org.example.main.Response;
+
 public class RemoveByIdCommand extends AbstractCommand implements Execute {
     private final Receiver receiver;
 

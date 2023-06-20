@@ -1,7 +1,10 @@
 package com.example.c.controllers;
 
-import com.example.c.FX.Table;
+import com.example.c.FX.Translation;
 import com.example.c.Fields.FieldFetcher;
+import com.example.c.Handler.RequestHandler;
+import com.example.c.Object.CommandManager;
+import com.example.c.validatorClient.Validation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,15 +12,17 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import main.org.example.main.CommandFactory;
+import org.example.main.CommandFactory;
+import org.example.main.Request;
+import org.example.main.Response;
+import org.example.main.TypeOfCommand;
+import org.example.models.StudyGroup;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddController implements Initializable {
-    private FieldFetcher fieldsValidator;
-    private CommandFactory command;
-    private byte[] bytes;
     @FXML
     private TextField AdminBirthday;
 
@@ -31,6 +36,9 @@ public class AddController implements Initializable {
     private TextField AdminWeight;
 
     @FXML
+    private TextField count;
+
+    @FXML
     private TextField X;
 
     @FXML
@@ -42,12 +50,8 @@ public class AddController implements Initializable {
     @FXML
     private TextField name;
 
-    public AddController(FieldFetcher fieldsValidator) {
-        this.fieldsValidator = fieldsValidator;
-    }
-
     @FXML
-    private javafx.scene.control.ChoiceBox<String> color;
+    private ChoiceBox<String> color;
 
     @FXML
     private ChoiceBox<String> form;
@@ -57,7 +61,12 @@ public class AddController implements Initializable {
 
     @FXML
     void addCollection() {
-//        try {
+        try {
+            StudyGroup studyGroup = new Validation().getStudyGroup(0, AddController.class);
+            CommandFactory commandFactory = new CommandFactory(TypeOfCommand.add, (ArrayList<String>) null);
+            Response response = RequestHandler.getInstance().send(commandFactory,studyGroup);
+
+        }catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
 //            StudyGroup studyGroup = new FieldFetcher().getDragon(0, Table.class);
 //            studyGroup.setCreation(new Timestamp(new Date().getTime()));
 //            StaticData.getData().getConnection().sendRequest(bytes);
@@ -69,6 +78,9 @@ public class AddController implements Initializable {
 
     @FXML
     private AnchorPane language;
+
+    @FXML
+    private ChoiceBox<String> languages;
 
 
 
@@ -82,6 +94,9 @@ public class AddController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ProxyController.setController(AddController.class,this);
 
-        new com.example.c.FX.ChoiceBox().boxInitialize(Table.class, color, semester, form);
+        languages.setItems(Translation.getAllLanguages());
+        languages.setValue(Translation.getLanguage());
+        new com.example.c.FX.ChoiceBox().boxInitialize(AddController.class, languages , color, semester, form);
+        languages.setOnAction(new Translation(AddController.class)::changeLanguage);
     }
 }

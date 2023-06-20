@@ -1,10 +1,9 @@
 package com.example.c.Object;
-
-import com.example.c.FX.Table;
 import com.example.c.Object.FrameHandler;
+import com.example.c.controllers.Table;
 import javafx.scene.control.TextField;
-import main.org.example.main.Response;
-import main.org.example.main.TypeOfAnswer;
+import org.example.main.Response;
+import org.example.main.TypeOfAnswer;
 
 public class MainModelAnimator {
     private final Table sgTableModel;

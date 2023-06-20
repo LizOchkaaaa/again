@@ -1,6 +1,6 @@
 package main.org.example.server.server.Factores;
 
-import main.org.example.models.Coordinates;
+import org.example.models.Coordinates;
 
 public class CoordinatesFactory {
     public Coordinates createCoordinates(String[] args) {

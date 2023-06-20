@@ -1,6 +1,6 @@
 package main.org.example.server.server;
 
-import main.org.example.main.Response;
+import org.example.main.Response;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

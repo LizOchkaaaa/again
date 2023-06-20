@@ -1,7 +1,7 @@
 package com.example.c.Handler;
 
-import main.org.example.main.Response;
-import main.org.example.main.TypeOfAnswer;
+import org.example.main.Response;
+import org.example.main.TypeOfAnswer;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

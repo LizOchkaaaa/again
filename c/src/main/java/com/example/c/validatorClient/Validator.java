@@ -2,8 +2,8 @@ package com.example.c.validatorClient;
 
 import com.example.c.Object.AvailableCommands;
 import com.example.c.FX.ValidatorInterface;
-import main.org.example.main.CommandFactory;
-import main.org.example.main.Session;
+import org.example.main.CommandFactory;
+import org.example.main.Session;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

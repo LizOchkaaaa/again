@@ -3,7 +3,7 @@ package com.example.c;
 import com.example.c.Fields.FieldsGetter;
 import com.example.c.Interface.FieldsReceiver;
 import com.example.c.Object.Consolee;
-import main.org.example.models.*;
+import org.example.models.*;
 
 import java.util.ArrayList;
 

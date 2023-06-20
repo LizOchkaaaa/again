@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -11,31 +12,47 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="614.0" styleClass="registration" stylesheets="@../../../css/registration.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.c.controllers.NewLoginController">
-   <top>
-      <AnchorPane prefHeight="493.0" prefWidth="639.0" BorderPane.alignment="CENTER">
+   <center>
+      <Group BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="164.0" layoutY="134.0" prefHeight="142.0" prefWidth="323.0">
+            <AnchorPane prefHeight="493.0" prefWidth="639.0">
                <children>
-                  <TextField fx:id="login" prefHeight="26.0" prefWidth="318.0" promptText="login">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <PasswordField fx:id="password" promptText="password">
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </PasswordField>
+                  <VBox layoutX="164.0" layoutY="134.0" prefHeight="142.0" prefWidth="323.0">
+                     <children>
+                        <Label fx:id="loginWarn" alignment="CENTER" prefHeight="18.0" prefWidth="328.0" textAlignment="CENTER" textFill="RED">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
+                        <TextField fx:id="login" onMouseClicked="#validate" prefHeight="26.0" prefWidth="318.0" promptText="login">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Label fx:id="passwordWarn" alignment="CENTER" prefHeight="18.0" prefWidth="337.0" textAlignment="CENTER" textFill="RED">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="password" onMouseClicked="#validate" promptText="password">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                     </children>
+                  </VBox>
+                  <Button fx:id="start" layoutX="248.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#startClick" prefHeight="52.0" prefWidth="132.0" text="Start" />
+                  <Label fx:id="label" alignment="CENTER" layoutX="138.0" layoutY="-3.0" prefHeight="60.0" prefWidth="338.0" text="Registration" textAlignment="CENTER">
+                     <font>
+                        <Font name="SimSun-ExtB" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="back" layoutX="505.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#backClick" prefHeight="42.0" prefWidth="94.0" text="Back" />
                </children>
-            </VBox>
-            <Button fx:id="start" layoutX="248.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#startClick" prefHeight="52.0" prefWidth="132.0" text="Start" />
-            <Label fx:id="label" alignment="CENTER" layoutX="138.0" layoutY="-3.0" prefHeight="60.0" prefWidth="338.0" text="Registration" textAlignment="CENTER">
-               <font>
-                  <Font name="SimSun-ExtB" size="36.0" />
-               </font>
-            </Label>
-            <Button fx:id="back" layoutX="505.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#backClick" prefHeight="42.0" prefWidth="94.0" text="Back" />
+            </AnchorPane>
          </children>
-      </AnchorPane>
-   </top>
+      </Group>
+   </center>
 </BorderPane>

@@ -1,6 +1,6 @@
 package main.org.example.server.server.Interfaces;
 
-import main.org.example.models.StudyGroup;
+import org.example.models.StudyGroup;
 
 import java.io.File;
 import java.time.ZonedDateTime;

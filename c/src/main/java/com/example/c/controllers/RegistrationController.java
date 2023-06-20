@@ -1,5 +1,8 @@
 package com.example.c.controllers;
+import com.example.c.FX.Registration;
 import com.example.c.FX.Translation;
+import com.example.c.FlowText;
+import com.example.c.Object.AlertUtility;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,13 +33,23 @@ public class RegistrationController implements Initializable {
     private Label registration;
 
     @FXML
+    @FlowText
     private Label passwordWarn;
 
     @FXML
     private Label welcome;
 
     @FXML
+    @FlowText
     private Label loginWarn;
+
+
+    @FXML
+    void validate(MouseEvent event) {
+        loginWarn.setText("");
+        passwordWarn.setText("");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ProxyController.setController(RegistrationController.class, this);
@@ -67,11 +80,11 @@ public class RegistrationController implements Initializable {
 
     @FXML
     void enterClick() {
-//        Registration registration1 = new Registration("existedUser", Translation.getLocale());
-//        registration1.register();
+        Registration registration1 = new Registration("existedUser", Translation.getLocale());
+        if (registration1.register()) {
 
-        Stage stage = (Stage) enter.getScene().getWindow();
-        Platform.runLater(() -> ProxyController.changeScene(stage, "table.fxml"));
+            Stage stage = (Stage) enter.getScene().getWindow();
+            Platform.runLater(() -> ProxyController.changeScene(stage, "table.fxml"));
+        }
     }
-
 }

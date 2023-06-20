@@ -5,8 +5,9 @@ import com.example.c.Object.AvailableCommands;
 import com.example.c.Object.DataInOutStatus;
 import com.example.c.Object.MetaInfoCommand;
 import com.example.c.Object.OutStream;
-import main.org.example.main.CommandFactory;
-import main.org.example.main.TypeOfCommand;
+import org.example.main.CommandFactory;
+import org.example.main.TypeOfCommand;
+
 
 import java.util.ArrayList;
 

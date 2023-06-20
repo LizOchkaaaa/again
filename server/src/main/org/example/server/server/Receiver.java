@@ -1,8 +1,8 @@
 package main.org.example.server.server;
 
-import main.org.example.main.TypeOfAnswer;
-import main.org.example.models.*;
 import main.org.example.server.server.DataBase.MainDB;
+import org.example.main.TypeOfAnswer;
+import org.example.models.*;
 
 import java.sql.Date;
 import java.sql.ResultSet;

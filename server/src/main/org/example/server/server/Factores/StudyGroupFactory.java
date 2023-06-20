@@ -1,6 +1,6 @@
 package main.org.example.server.server.Factores;
 
-import main.org.example.models.*;
+import org.example.models.*;
 
 import java.util.ArrayList;
 

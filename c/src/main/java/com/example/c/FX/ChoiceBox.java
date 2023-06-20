@@ -1,10 +1,10 @@
 package com.example.c.FX;
 
 import com.example.c.controllers.ProxyController;
-import com.example.c.models.StudyGroup;
 import javafx.fxml.FXML;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
+import org.example.models.StudyGroup;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

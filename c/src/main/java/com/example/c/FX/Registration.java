@@ -9,8 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.org.example.main.Session;
-import main.org.example.main.TypeOfSession;
+import org.example.main.Session;
+import org.example.main.TypeOfAnswer;
+import org.example.main.TypeOfSession;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -36,17 +37,15 @@ public class Registration implements Runnable {
 
     public boolean register() {
             if (registerEmpty() & registerLong()) {
-                Object[] fields = controller.getFields("register", "enter", "languages");
-                Arrays.stream(fields).forEach(r -> ((Node) r).setDisable(true));
-                login = ((TextField) controller.getField("login")).getText();
-                password = ((TextField) controller.getField("password")).getText();
+            login = ((TextField) controller.getField("login")).getText();
+            password = ((TextField) controller.getField("password")).getText();
 
-                Session session = new Session(login, password, TypeOfSession.Register);
-
-                CommandManager commandManager = new CommandManager(validator, controller);
-                commandManager.transferCommand(session);
-
+            Session session = new Session(login, password, TypeOfSession.Login);
+            CommandManager commandManager = new CommandManager(validator, controller);
+            if (commandManager.transferCommand(session).getStatus() == TypeOfAnswer.SUCCESSFUL){
+                return true;
             }
+        }
         return false;
     }
 
@@ -65,14 +64,14 @@ public class Registration implements Runnable {
 
         TextField login = controller.getField("login");
         if (login.getText().length() == 0) {
-            Label label = controller.getField("loginLabel");
+            Label label = controller.getField("loginWarn");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("loginEmpty"));
             result = false;
         }
 
         TextField password = controller.getField("password");
         if (password.getText().length() == 0) {
-            Label label = controller.getField("passwordLabel");
+            Label label = controller.getField("passwordWarn");
             label.setText(ResourceBundle.getBundle(bundle, locale).getString("passwordEmpty"));
             result = false;
         }
@@ -84,17 +83,6 @@ public class Registration implements Runnable {
         ProxyController controller = new ProxyController(RegistrationController.class);
         boolean result = true;
         String bundle = "properties.Registration";
-
-        TextField port = controller.getField("port");
-        try {
-            if (port.getText().length() != 0) {
-                Integer.parseInt(port.getText());
-            }
-        } catch (NumberFormatException e) {
-            Label label = controller.getField("portLabel");
-            label.setText(ResourceBundle.getBundle(bundle, locale).getString("portWrongFormat"));
-            result = false;
-        }
 
         TextField login = controller.getField("login");
         if (login.getText().length() > 32) {

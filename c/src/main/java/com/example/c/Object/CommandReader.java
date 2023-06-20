@@ -1,9 +1,9 @@
 package com.example.c.Object;
 
-import main.org.example.main.CommandFactory;
-import main.org.example.main.Response;
-import main.org.example.main.Session;
-import main.org.example.main.TypeOfCommand;
+import org.example.main.CommandFactory;
+import org.example.main.Response;
+import org.example.main.Session;
+import org.example.main.TypeOfCommand;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

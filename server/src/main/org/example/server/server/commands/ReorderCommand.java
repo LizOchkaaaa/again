@@ -1,11 +1,11 @@
 package main.org.example.server.server.commands;
 
-import main.org.example.interfaces.Execute;
-import main.org.example.main.Request;
-import main.org.example.main.Response;
-import main.org.example.main.TypeOfAnswer;
-import main.org.example.models.StudyGroup;
 import main.org.example.server.server.Receiver;
+import org.example.interfaces.Execute;
+import org.example.main.Request;
+import org.example.main.Response;
+import org.example.main.TypeOfAnswer;
+import org.example.models.StudyGroup;
 
 import java.util.Stack;
 import java.util.stream.Collectors;
