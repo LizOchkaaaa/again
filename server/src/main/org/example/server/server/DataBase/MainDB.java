@@ -157,7 +157,7 @@ public class MainDB {
         statement.setString(2 , studyGroup.getName());
         statement.setDouble(3 , studyGroup.getCoordinates().getX());
         statement.setInt(4 , studyGroup.getCoordinates().getY());
-        statement.setDate(5, Date.valueOf(studyGroup.getCreationDate().toLocalDate()));
+        statement.setDate(5, new Date(studyGroup.getCreationDate().getTime()));
         statement.setInt(6 , studyGroup.getStudentsCount());
         if(studyGroup.getFormOfEducation() == null) {
            statement.setNull(7 , Types.VARCHAR);
@@ -170,7 +170,7 @@ public class MainDB {
             statement.setString(8 , studyGroup.getSemesterEnum().toString());
         }
         statement.setString(9 , studyGroup.getGroupAdmin().getName());
-        statement.setDate(10 , Date.valueOf(studyGroup.getGroupAdmin().getBirthday().toLocalDate()));
+        statement.setDate(10 , new Date(studyGroup.getGroupAdmin().getBirthday().getTime()));
         statement.setLong(11 , studyGroup.getGroupAdmin().getWeight());
         statement.setString(12 , studyGroup.getGroupAdmin().getPassportID());
         statement.setString(13 , studyGroup.getGroupAdmin().getHairColor().toString());
@@ -186,7 +186,7 @@ public class MainDB {
         statement.setString(1 , studyGroup.getName());
         statement.setDouble(2 , studyGroup.getCoordinates().getX());
         statement.setInt(3 , studyGroup.getCoordinates().getY());
-        statement.setDate(4, Date.valueOf(studyGroup.getCreationDate().toLocalDate()));
+        statement.setDate(4, new Date(studyGroup.getCreationDate().getTime()));
         statement.setInt(5 , studyGroup.getStudentsCount());
         if(studyGroup.getFormOfEducation() == null) {
             statement.setNull(6 , Types.VARCHAR);
@@ -199,7 +199,7 @@ public class MainDB {
             statement.setString(7 , studyGroup.getSemesterEnum().toString());
         }
         statement.setString(8 , studyGroup.getGroupAdmin().getName());
-        statement.setDate(9 , Date.valueOf(studyGroup.getGroupAdmin().getBirthday().toLocalDate()));
+        statement.setDate(9 , new Date(studyGroup.getGroupAdmin().getBirthday().getTime()));
         statement.setInt(10 , studyGroup.getGroupAdmin().getWeight());
         statement.setString(11 , studyGroup.getGroupAdmin().getPassportID());
         statement.setString(12 , studyGroup.getGroupAdmin().getHairColor().toString());

@@ -24,7 +24,7 @@
                <children>
                   <AnchorPane layoutX="14.0" prefHeight="43.0" prefWidth="103.0">
                      <children>
-                        <Label fx:id="loginText" alignment="CENTER" layoutX="-7.0" layoutY="13.0" prefHeight="18.0" prefWidth="46.0" text="Author" />
+                        <Label fx:id="loginText" alignment="CENTER" layoutX="-7.0" layoutY="13.0" prefHeight="18.0" prefWidth="196.0" text="Author" />
                      </children>
                   </AnchorPane>
                </children>
@@ -55,7 +55,6 @@
                       <TableColumn fx:id="count" prefWidth="49.5999755859375" text="Число" />
                         <TableColumn fx:id="form" prefWidth="60.000030517578125" text="Форма" />
                         <TableColumn fx:id="semester" prefWidth="75.0" text="Семестр" />
-                        <TableColumn minWidth="0.0" prefWidth="0.0" text="Column X" />
                         <TableColumn fx:id="AdminName" prefWidth="58.39990234375" text="Имя" />
                         <TableColumn fx:id="AdminBirthday" prefWidth="45.60009765625" text="Дата" />
                         <TableColumn fx:id="AdminWeight" prefWidth="55.199951171875" text="Вес" />

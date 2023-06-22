@@ -12,6 +12,8 @@ public class Response implements Serializable {
     private String information;
     private StudyGroup studyGroup;
     private Map<String, String> information1 = null;
+
+    private Stack<StudyGroup> collection;
     private Stack<StudyGroup> stackOfStudyGroups = null;
     private final TypeOfAnswer status;
     private Long count = null;
@@ -85,5 +87,9 @@ public class Response implements Serializable {
 
     public Long getCount() {
         return count;
+    }
+
+    public Stack<StudyGroup> getCollection() {
+        return stackOfStudyGroups;
     }
 }

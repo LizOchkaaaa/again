@@ -1,18 +1,18 @@
 package com.example.c.FX;
 
+import com.example.c.models.Color;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import org.example.models.Color;
 
 import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Animation {
-    private Color color;
+    private com.example.c.models.Color color;
     private AnchorPane main;
     private ExecutorService service;
 
@@ -21,7 +21,7 @@ public class Animation {
 
     private AtomicBoolean work = new AtomicBoolean(true);
 
-    public Animation(Color color) {
+    public Animation(com.example.c.models.Color color) {
         this.color = color;
     }
 

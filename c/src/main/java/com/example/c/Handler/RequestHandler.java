@@ -72,7 +72,7 @@ public class RequestHandler implements RequestHandlerInterface {
 
     @Override
     public Session getSession() {
-        return null;
+        return this.session;
     }
 
     public Response register(Session aSession) {

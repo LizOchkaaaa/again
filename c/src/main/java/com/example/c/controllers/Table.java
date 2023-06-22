@@ -1,37 +1,54 @@
 package com.example.c.controllers;
 
 import com.example.c.FX.CloseAction;
+import com.example.c.FX.StaticData;
 import com.example.c.FX.StudyGroupTable;
 import com.example.c.FX.Translation;
 import com.example.c.Handler.RequestHandler;
+import com.example.c.validatorClient.Validation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import org.example.main.CommandFactory;
 import org.example.main.Response;
+import org.example.main.Session;
 import org.example.main.TypeOfCommand;
 import org.example.models.*;
 
 import java.net.URL;
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.*;
 
 public class Table implements Initializable, CloseAction {
     private int idbufer;
     private Stack<StudyGroup> collection;
+    private Timestamp dateBuffer;
+
+    private Map<String, javafx.scene.paint.Color> clientColorMap = new HashMap<>();
+    @FXML
+    private TableView<StudyGroup> studyView;
     private ObservableList<StudyGroup> currentList;
     @FXML
-    private TableColumn<StudyGroup, ZonedDateTime> AdminBirthday;
+    private TableColumn<StudyGroup, String> AdminBirthday;
 
     @FXML
     private TableColumn<StudyGroup, String> AdminColor;
@@ -52,7 +69,7 @@ public class Table implements Initializable, CloseAction {
     private TableColumn<StudyGroup, String> author;
 
     @FXML
-    private TableColumn<StudyGroup, ZonedDateTime> date;
+    private TableColumn<StudyGroup, String> date;
 
     @FXML
     private Button filter;
@@ -72,22 +89,15 @@ public class Table implements Initializable, CloseAction {
     @FXML
     private Button script;
 
-    @FXML
-    private TableView<StudyGroup> studyView;
 
     @FXML
     private Label exit;
 
     @FXML
-    private Button help;
-    @FXML
     private Button exitt;
 
     @FXML
     private TableColumn<StudyGroup, Integer> id;
-
-    @FXML
-    private Button info;
 
     @FXML
     private ChoiceBox<String> languages;
@@ -119,9 +129,9 @@ public class Table implements Initializable, CloseAction {
     private TableColumn<StudyGroup, String> form;
 
     @FXML
-    private TableColumn<StudyGroup, String>  semester;
+    private TableColumn<StudyGroup, String> semester;
 
-    private static ObservableList<Person> study = FXCollections.observableArrayList();
+    private static ObservableList<com.example.c.models.Person> study = FXCollections.observableArrayList();
 
     private static Table instance;
 
@@ -130,11 +140,12 @@ public class Table implements Initializable, CloseAction {
         return instance;
     }
 
-    public void loadCollection(){
+    public void loadCollection() {
         CommandFactory commandFactory = new CommandFactory(TypeOfCommand.show, (ArrayList<String>) null);
         Response response = RequestHandler.getInstance().send(commandFactory);
         setCollection(response.getStackOfStudyGroups());
     }
+
     public void setCollection(Stack<StudyGroup> collection) {
         this.collection = collection;
         if (collection != null) {
@@ -142,23 +153,17 @@ public class Table implements Initializable, CloseAction {
                 System.out.println(studyGroup.toString());
             }
             studyView.setItems(FXCollections.observableArrayList(collection));
-
-//            always sort TableView by id (by default), if i want to bypass the TreeSet sorting
-//            idColumn.setSortType(TableColumn.SortType.ASCENDING);
-//            table.getSortOrder().add(idColumn);
-
             studyView.refresh();
         }
     }
-    public static ObservableList<Person> getPerson() {
+
+    public static ObservableList<com.example.c.models.Person> getPerson() {
         return study;
     }
 
     @FXML
-    void addClick(){
+    void addClick() {
         ProxyController.changeScene(new Stage(), "addTable.fxml");
-//            Stage stage = (Stage) add.getScene().getWindow();
-//            Platform.runLater(() -> ProxyController.changeScene(stage, "addTable.fxml"));
     }
 
 
@@ -218,6 +223,7 @@ public class Table implements Initializable, CloseAction {
         currentList = FXCollections.observableArrayList(filtered);
         studyView.setItems(currentList);
     }
+
     @FXML
     void executeScriptClick() {
 
@@ -225,16 +231,6 @@ public class Table implements Initializable, CloseAction {
 
     @FXML
     void exitFromTable() {
-
-    }
-
-    @FXML
-    void helpClick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void infoClick(MouseEvent event) {
 
     }
 
@@ -266,13 +262,22 @@ public class Table implements Initializable, CloseAction {
 
     @FXML
     void updateClick(MouseEvent event) {
+        try {
+            StudyGroup studyGroup = new Validation().getStudyGroup(idbufer, Table.class);
+            studyGroup.setCreationDate(dateBuffer.getTimestamp());
+            CommandFactory commandFactory = new CommandFactory(TypeOfCommand.valueOf("update"), (String) null);
+            Response response = RequestHandler.getInstance().send(commandFactory);
+            collection = response.getCollection();
+        } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
 
     }
+
     private final EventHandler<WindowEvent> closeEvent = event -> {
         System.out.println("ttt");
 //        StaticData.getData().getConnection().close();
 //        Connection.stop();
     };
+
     @Override
     public EventHandler<WindowEvent> close() {
         return closeEvent;
@@ -286,12 +291,99 @@ public class Table implements Initializable, CloseAction {
         languages.setValue(Translation.getLanguage());
         new Translation(Table.class).changeLanguage(null);
         languages.setOnAction(new Translation(Table.class)::changeLanguage);
+
+        id.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        coordinateX.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getCoordinates().getX()).asObject());
+        coordinateY.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCoordinates().getY()).asObject());
+        date.setCellValueFactory(cellData -> new SimpleStringProperty(getDate(cellData.getValue().getCreationDate())));
+        count.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getStudentsCount()).asObject());
+        form.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFormOfEducation().getForm()));
+        semester.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSemesterEnum().getSemester()));
+        AdminName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGroupAdmin().getName()));
+        AdminBirthday.setCellValueFactory(cellData -> new SimpleStringProperty(getDate(cellData.getValue().getGroupAdmin().getBirthday())));
+        AdminWeight.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getGroupAdmin().getWeight()).asObject());
+        AdminPassport.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGroupAdmin().getPassportID()));
+        AdminColor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGroupAdmin().getHairColor().getColor()));
+        author.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuthor()));
+
+
+        id.setPrefWidth(20);
+        name.setPrefWidth(50);
+        coordinateX.setPrefWidth(20);
+        coordinateY.setPrefWidth(20);
+        date.setPrefWidth(50);
+        count.setPrefWidth(30);
+        form.setPrefWidth(50);
+        semester.setPrefWidth(50);
+        AdminName.setPrefWidth(50);
+        AdminBirthday.setPrefWidth(50);
+        AdminWeight.setPrefWidth(30);
+        AdminPassport.setPrefWidth(30);
+        AdminColor.setPrefWidth(50);
+        author.setPrefWidth(50);
+
+        String user = RequestHandler.getInstance().getSession().getName();
+        loginText.setText(user);
+        loadOwnershipMap();
+
+        studyView.setRowFactory(tv -> new TableRow<StudyGroup>() {
+            @Override
+            public void updateItem(StudyGroup studyGroup, boolean empty) {
+                super.updateItem(studyGroup, empty);
+                if (studyGroup == null) {
+                    setStyle("");
+                } else {
+                    javafx.scene.paint.Color color1 = clientColorMap.get(studyGroup.getAuthor());
+                    String rgb = String.format("#%02X%02X%02X",
+                            (int) (color1.getRed() * 255),
+                            (int) (color1.getGreen() * 255),
+                            (int) (color1.getBlue() * 255));
+                    setStyle("-fx-border-color: " + rgb + ";");
+                }
+            }
+        });
+
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(4), event -> loadCollection()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-//        currentList = StudyTable.getStudy();
-//        loginText.setText(StaticData.getData().getLogin());
 
+//        filter.textProperty().addListener((observable , oldValue , newValue) -> {
+//            if (newValue != null && !newValue.isEmpty()) {
+//                String selectedValue = .getSelectionModel().getSelectedItem();
+//                filterCities(selectedValue, newValue);
+//            } else {
+//                // If the TextField is empty, show all cities
+//                studyView.setItems(FXCollections.observableArrayList(collection));
+//        };
+
+        currentList = StudyGroupTable.getStudy();
+        loginText.setText(StaticData.getData().getLogin());
+    }
+
+        private void loadOwnershipMap() {
+            Session session = RequestHandler.getInstance().getSession();
+            CommandFactory commandFactory = new CommandFactory(TypeOfCommand.valueOf("show"), (String) null);
+            Response response = RequestHandler.getInstance().send(commandFactory);
+            collection = response.getCollection();
+            if (collection != null) {
+                for (StudyGroup studyGroup : collection) {
+                    if (studyGroup.getAuthor().equals(session.getName())) {
+                        clientColorMap.put(studyGroup.getAuthor(), javafx.scene.paint.Color.GREEN);
+                    } else {
+                        if (!clientColorMap.containsKey(studyGroup.getAuthor())) {
+                            javafx.scene.paint.Color randomColor = javafx.scene.paint.Color.color(Math.random(), Math.random(), Math.random());
+                            clientColorMap.put(studyGroup.getAuthor(), randomColor);
+                        }
+                    }
+                }
+            }
+        }
+
+    private String getDate(Date date) {
+        if (date == null) return "null";
+        DateFormat formatter = DateFormat.getDateInstance();
+        return formatter.format(date);
     }
 
     @FXML

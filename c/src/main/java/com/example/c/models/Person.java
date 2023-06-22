@@ -1,9 +1,9 @@
-package org.example.models;
+package com.example.c.models;
 
+import com.example.c.FX.Animation;
 import org.example.annotation.Complex;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.Date;
 
 public class Person implements Serializable {
@@ -17,6 +17,7 @@ public class Person implements Serializable {
 
     private String character;
 
+    private transient Animation animated;
     public Person(){}
     public Person(String name , Date birthday , Integer weight , String passportID , Color hairColor) {
         this.name = name;
@@ -63,6 +64,15 @@ public class Person implements Serializable {
         return character;
     }
     public void start() {
-       // animator = new Animation(hairColor);
+        animated = new Animation(hairColor);
+        try {
+            animated.start();
+        } catch (NullPointerException ignored) {}
+    }
+
+    public void finish() {
+        try {
+            animated.remove();
+        } catch (NullPointerException ignored) {}
     }
 }

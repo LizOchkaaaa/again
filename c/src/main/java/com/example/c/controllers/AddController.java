@@ -5,17 +5,20 @@ import com.example.c.Fields.FieldFetcher;
 import com.example.c.Handler.RequestHandler;
 import com.example.c.Object.CommandManager;
 import com.example.c.validatorClient.Validation;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.main.CommandFactory;
 import org.example.main.Request;
 import org.example.main.Response;
 import org.example.main.TypeOfCommand;
+import org.example.models.Person;
 import org.example.models.StudyGroup;
 
 import java.net.URL;
@@ -59,6 +62,8 @@ public class AddController implements Initializable {
     @FXML
     private ChoiceBox<String> semester;
 
+    private static ObservableList<Person> study = FXCollections.observableArrayList();
+
     @FXML
     void addCollection() {
         try {
@@ -67,12 +72,7 @@ public class AddController implements Initializable {
             Response response = RequestHandler.getInstance().send(commandFactory,studyGroup);
 
         }catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
-//            StudyGroup studyGroup = new FieldFetcher().getDragon(0, Table.class);
-//            studyGroup.setCreation(new Timestamp(new Date().getTime()));
-//            StaticData.getData().getConnection().sendRequest(bytes);
-//        } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
-    }
-
+        }
     @FXML
     private Button exiting;
 

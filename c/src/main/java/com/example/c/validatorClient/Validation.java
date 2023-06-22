@@ -7,12 +7,12 @@ import com.example.c.controllers.ProxyController;
 import javafx.scene.control.TextField;
 import org.example.models.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Validation {
     public String string(TextField field) {
@@ -52,20 +52,19 @@ public class Validation {
         }
         return null;
     }
-    public ZonedDateTime birthday(TextField field){
-        try {
+    public Date birthday(TextField field) {
             String variable = field.getText();
-            String[] args = variable.split("-");
-            ZonedDateTime zdtWithZoneOffset = ZonedDateTime.of(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), 0, 0, 0, 0, ZoneId.systemDefault());
-            if (variable != null && args.length == 3) {
-                return zdtWithZoneOffset;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                return simpleDateFormat.parse(variable);
+            } catch (IndexOutOfBoundsException | DateTimeException | NullPointerException | NumberFormatException |
+                     ParseException e) {
+                field.setText("");
+                field.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString("numberError"));
+                new ChoiceBox().textFieldError(field);
             }
-        }catch (IndexOutOfBoundsException | DateTimeException | NullPointerException | NumberFormatException e) {
-            field.setText("");
-            field.setPromptText(ResourceBundle.getBundle("properties.Table", Translation.getLocale()).getString("numberError"));
-            new ChoiceBox().textFieldError(field);
-        }
-        return null;
+            return null;
+
     }
 
     public Object[] validate(Class<?> controllerClass) {
@@ -94,7 +93,7 @@ public class Validation {
 
         return new StudyGroup(id, (String) elements[0], new Coordinates((Double) elements[1], (Integer) elements[2]),
                 Semester.valueOf(Semester.values()[(int) elements[3]].getSemester()), (Integer) elements[4],
-                FormOfEducation.valueOf(FormOfEducation.values()[(int) elements[5]].getForm()), new Person((String) elements[6], (ZonedDateTime) elements[7],
+                FormOfEducation.valueOf(FormOfEducation.values()[(int) elements[5]].getForm()), new Person((String) elements[6], (Date) elements[7],
                 (Integer) elements[8], (String) elements[9], Color.valueOf(Color.values()[(int) elements[10]].getColor())));
 
     }
