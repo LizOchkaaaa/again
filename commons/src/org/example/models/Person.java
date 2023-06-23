@@ -62,7 +62,4 @@ public class Person implements Serializable {
     public String getCharacter() {
         return character;
     }
-    public void start() {
-       // animator = new Animation(hairColor);
-    }
 }

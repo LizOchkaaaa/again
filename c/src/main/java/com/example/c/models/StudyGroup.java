@@ -1,5 +1,7 @@
 package com.example.c.models;
 
+import com.example.c.validatorClient.Validator;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -48,6 +50,10 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
         this.studentsCount = studentsCount;
         this.formOfEducation = formOfEducation;
         this.groupAdmin = groupAdmin;
+    }
+
+    public void personStart(){
+        groupAdmin.start();
     }
 
     public Integer getId() {

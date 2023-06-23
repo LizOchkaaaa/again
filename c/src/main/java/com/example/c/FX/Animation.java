@@ -1,7 +1,9 @@
 package com.example.c.FX;
 
+import com.example.c.controllers.ProxyController;
 import com.example.c.models.Color;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -13,6 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Animation {
     private com.example.c.models.Color color;
+
     private AnchorPane main;
     private ExecutorService service;
 
@@ -30,19 +33,21 @@ public class Animation {
 
 
     public void start() {
+        main = new ProxyController(Start.class).getField("main");
+        service = new ProxyController(Start.class).getField("service");
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        new Start().service.submit(() -> {
+        service.submit(() -> {
             initialize();
             image.setTranslateX(x);
             image.setTranslateY(y);
-            image.setFitWidth(300);
-            image.setFitHeight(250);
+            image.setFitWidth(200);
+            image.setFitHeight(150);
 
-            main.getChildren().add(image);
+           Platform.runLater(() -> main.getChildren().add(image));
             goTransition.setNode(image);
 
             while(work.get()) {

@@ -3,6 +3,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane fx:id="visual" prefHeight="530.0" prefWidth="755.0" styleClass="start" stylesheets="@../../../css/start.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.c.FX.Start">
+<AnchorPane fx:id="main" prefHeight="530.0" prefWidth="755.0" styleClass="start" stylesheets="@../../../css/start.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.c.FX.Start">
 
 </AnchorPane>

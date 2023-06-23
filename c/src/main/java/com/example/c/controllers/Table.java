@@ -1,10 +1,8 @@
 package com.example.c.controllers;
 
-import com.example.c.FX.CloseAction;
-import com.example.c.FX.StaticData;
-import com.example.c.FX.StudyGroupTable;
-import com.example.c.FX.Translation;
+import com.example.c.FX.*;
 import com.example.c.Handler.RequestHandler;
+import com.example.c.Object.AlertUtility;
 import com.example.c.validatorClient.Validation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
@@ -37,10 +36,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Table implements Initializable, CloseAction {
     private int idbufer;
-    private Stack<StudyGroup> collection;
+    private Stack<StudyGroup> oldCollection;
+    private static Stack<com.example.c.models.StudyGroup> collection;
     private Timestamp dateBuffer;
 
     private Map<String, javafx.scene.paint.Color> clientColorMap = new HashMap<>();
@@ -131,7 +133,7 @@ public class Table implements Initializable, CloseAction {
     @FXML
     private TableColumn<StudyGroup, String> semester;
 
-    private static ObservableList<com.example.c.models.Person> study = FXCollections.observableArrayList();
+//    private static ObservableList<com.example.c.models.Person> study = FXCollections.observableArrayList();
 
     private static Table instance;
 
@@ -143,11 +145,12 @@ public class Table implements Initializable, CloseAction {
     public void loadCollection() {
         CommandFactory commandFactory = new CommandFactory(TypeOfCommand.show, (ArrayList<String>) null);
         Response response = RequestHandler.getInstance().send(commandFactory);
+        oldCollection = response.getCollection();
         setCollection(response.getStackOfStudyGroups());
     }
 
     public void setCollection(Stack<StudyGroup> collection) {
-        this.collection = collection;
+        change(collection);
         if (collection != null) {
             for (StudyGroup studyGroup : collection) {
                 System.out.println(studyGroup.toString());
@@ -157,8 +160,8 @@ public class Table implements Initializable, CloseAction {
         }
     }
 
-    public static ObservableList<com.example.c.models.Person> getPerson() {
-        return study;
+    public static Stack<com.example.c.models.StudyGroup> getPerson() {
+        return collection;
     }
 
     @FXML
@@ -245,11 +248,6 @@ public class Table implements Initializable, CloseAction {
     }
 
     @FXML
-    void reorderClick(MouseEvent event) {
-
-    }
-
-    @FXML
     void startClick(MouseEvent event) {
         ProxyController.changeScene(new Stage(), "start.fxml");
 
@@ -261,13 +259,15 @@ public class Table implements Initializable, CloseAction {
     }
 
     @FXML
-    void updateClick(MouseEvent event) {
+    void updateClick() {
         try {
-            StudyGroup studyGroup = new Validation().getStudyGroup(idbufer, Table.class);
-            studyGroup.setCreationDate(dateBuffer.getTimestamp());
-            CommandFactory commandFactory = new CommandFactory(TypeOfCommand.valueOf("update"), (String) null);
-            Response response = RequestHandler.getInstance().send(commandFactory);
-            collection = response.getCollection();
+            StudyGroup studyGroup = studyView.getSelectionModel().getSelectedItem();
+            if (studyGroup != null){
+                AddTable addTable = new AddTable();
+                addTable.setId(studyGroup.getId());
+            }else {
+                AlertUtility.infoAlert("Please, select any StudyGroup to update it");
+            }
         } catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
 
     }
@@ -310,8 +310,8 @@ public class Table implements Initializable, CloseAction {
 
         id.setPrefWidth(20);
         name.setPrefWidth(50);
-        coordinateX.setPrefWidth(20);
-        coordinateY.setPrefWidth(20);
+        coordinateX.setPrefWidth(40);
+        coordinateY.setPrefWidth(40);
         date.setPrefWidth(50);
         count.setPrefWidth(30);
         form.setPrefWidth(50);
@@ -348,14 +348,14 @@ public class Table implements Initializable, CloseAction {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
-//        filter.textProperty().addListener((observable , oldValue , newValue) -> {
-//            if (newValue != null && !newValue.isEmpty()) {
-//                String selectedValue = .getSelectionModel().getSelectedItem();
-//                filterCities(selectedValue, newValue);
-//            } else {
-//                // If the TextField is empty, show all cities
-//                studyView.setItems(FXCollections.observableArrayList(collection));
-//        };
+        filter.textProperty().addListener((observable , oldValue , newValue) -> {
+                    if (newValue != null && !newValue.isEmpty()) {
+//                        String selectedValue = .getSelectedItem();
+//                        filterCities(selectedValue, newValue);
+                    } else {
+                        // If the TextField is empty, show all cities
+                        studyView.setItems(FXCollections.observableArrayList(oldCollection));
+                    }});
 
         currentList = StudyGroupTable.getStudy();
         loginText.setText(StaticData.getData().getLogin());
@@ -365,9 +365,9 @@ public class Table implements Initializable, CloseAction {
             Session session = RequestHandler.getInstance().getSession();
             CommandFactory commandFactory = new CommandFactory(TypeOfCommand.valueOf("show"), (String) null);
             Response response = RequestHandler.getInstance().send(commandFactory);
-            collection = response.getCollection();
+            change(response.getCollection());
             if (collection != null) {
-                for (StudyGroup studyGroup : collection) {
+                for (com.example.c.models.StudyGroup studyGroup : collection) {
                     if (studyGroup.getAuthor().equals(session.getName())) {
                         clientColorMap.put(studyGroup.getAuthor(), javafx.scene.paint.Color.GREEN);
                     } else {
@@ -399,6 +399,29 @@ public class Table implements Initializable, CloseAction {
         idbufer = 0;
         currentList = StudyGroupTable.getStudy();
         studyView.setItems(currentList);
+    }
+    public void change(Stack<StudyGroup> aCollection) {
+        collection = new Stack<com.example.c.models.StudyGroup>();
+        for (StudyGroup aStudyGroup : aCollection) {
+            com.example.c.models.StudyGroup studyGroup = new com.example.c.models.StudyGroup(aStudyGroup.getId(),
+                    aStudyGroup.getName(), new com.example.c.models.Coordinates(aStudyGroup.getCoordinates().getX(), aStudyGroup.getCoordinates().getY()), aStudyGroup.getCreationDate(), aStudyGroup.getStudentsCount(),
+                    com.example.c.models.FormOfEducation.valueOf(aStudyGroup.getFormOfEducation().getForm()), com.example.c.models.Semester.valueOf(aStudyGroup.getSemesterEnum().getSemester()), new com.example.c.models.Person(aStudyGroup.getGroupAdmin().getName(), aStudyGroup.getGroupAdmin().getBirthday(),
+                    aStudyGroup.getGroupAdmin().getWeight(), aStudyGroup.getGroupAdmin().getPassportID(),
+                    com.example.c.models.Color.valueOf(aStudyGroup.getGroupAdmin().getHairColor().getColor())), aStudyGroup.getAuthor());
+            collection.add(studyGroup);
+        }
+    }
+    @FXML
+    protected void onUpdateClick(MouseEvent e){
+
+    }
+    public com.example.c.models.StudyGroup changeStudyGroup(StudyGroup aStudyGroup){
+        com.example.c.models.StudyGroup studyGroup = new com.example.c.models.StudyGroup(aStudyGroup.getId(),
+                aStudyGroup.getName(), new com.example.c.models.Coordinates(aStudyGroup.getCoordinates().getX(), aStudyGroup.getCoordinates().getY()), aStudyGroup.getCreationDate(), aStudyGroup.getStudentsCount(),
+                com.example.c.models.FormOfEducation.valueOf(aStudyGroup.getFormOfEducation().getForm()), com.example.c.models.Semester.valueOf(aStudyGroup.getSemesterEnum().getSemester()), new com.example.c.models.Person(aStudyGroup.getGroupAdmin().getName(), aStudyGroup.getGroupAdmin().getBirthday(),
+                aStudyGroup.getGroupAdmin().getWeight(), aStudyGroup.getGroupAdmin().getPassportID(),
+                com.example.c.models.Color.valueOf(aStudyGroup.getGroupAdmin().getHairColor().getColor())), aStudyGroup.getAuthor());
+        return studyGroup;
     }
 
     @FXML

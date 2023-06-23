@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddController implements Initializable {
+    private Integer id;
     @FXML
     private TextField AdminBirthday;
 
@@ -67,8 +68,19 @@ public class AddController implements Initializable {
     @FXML
     void addCollection() {
         try {
-            StudyGroup studyGroup = new Validation().getStudyGroup(0, AddController.class);
-            CommandFactory commandFactory = new CommandFactory(TypeOfCommand.add, (ArrayList<String>) null);
+            if (id == null){
+                id = 0;
+            }
+            StudyGroup studyGroup = new Validation().getStudyGroup(id, AddController.class);
+            CommandFactory commandFactory;
+            if (id == 0){
+             commandFactory = new CommandFactory(TypeOfCommand.add, (ArrayList<String>) null);
+            }
+            else {
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList.add(id.toString());
+                commandFactory = new CommandFactory(TypeOfCommand.update, arrayList);
+            }
             Response response = RequestHandler.getInstance().send(commandFactory,studyGroup);
 
         }catch (NullPointerException ignored) {} //Неверный ввод некоторых данных. Игнорирую
@@ -98,5 +110,8 @@ public class AddController implements Initializable {
         languages.setValue(Translation.getLanguage());
         new com.example.c.FX.ChoiceBox().boxInitialize(AddController.class, languages , color, semester, form);
         languages.setOnAction(new Translation(AddController.class)::changeLanguage);
+    }
+    public void setId(Integer aId){
+        id = aId;
     }
 }

@@ -143,6 +143,7 @@ public class StudyGroup implements Comparable<StudyGroup>, Serializable {
         return this;
     }
 
+
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
